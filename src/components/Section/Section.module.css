@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
+
+section {
+  background-color: rgb(255, 255, 255);
+  border-radius: 4px;
+  border: 1px solid rgb(219, 219, 219);
+  margin-bottom: 40px;
+  padding-bottom: 20px;
+  color: #383838;
+}
+
+.title {
+  text-align: center;
+  font-family: 'Dancing Script', cursive;
+  font-size: 32px;
+  margin: 0 auto 20px auto;
+  padding: 0.63em 0;
+  border-bottom: 3px solid rgb(0, 140, 255);
+}
