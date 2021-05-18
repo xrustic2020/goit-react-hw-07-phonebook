@@ -3,6 +3,7 @@ import initialState from 'redux/initialState';
 import actions from './items-actions.js';
 
 const itemsReducer = createReducer(initialState.contacts.items, {
+  'contacts/getSucces': (_, { payload }) => payload,
   [actions.addedContact]: (state, { payload }) => [...state, payload],
   [actions.deleteContactItem]: (state, { payload }) => [
     ...state.filter(el => el.id !== payload),

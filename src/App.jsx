@@ -8,7 +8,13 @@ import ContactList from 'components/Contacts/ContactList';
 import Container from 'components/Container';
 import Section from 'components/Section';
 
-const App = ({ contacts }) => {
+import actions from './redux/items/items-actions';
+
+const App = ({ contacts, getContacts }) => {
+  useEffect(() => {
+    getContacts();
+  }, []); // eslint-disable-line
+
   useEffect(() => {
     localStorage.setItem('contacts', JSON.stringify(contacts));
   }, [contacts]);
@@ -34,4 +40,8 @@ const mapStateToProps = state => ({
   contacts: state.contacts.items,
 });
 
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = dispatch => {
+  return { getContacts: () => dispatch(actions.getContacts()) };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -1,5 +1,3 @@
-import { createAction } from '@reduxjs/toolkit';
-
 import axios from 'axios';
 axios.defaults.baseURL = 'http://localhost:4444';
 
@@ -14,14 +12,4 @@ const getContacts = _ => dispatch => {
     .catch(error => dispatch({ type: 'contacts/getError', payload: error }));
 };
 
-// const getContacts = createAction('contacts/get');
-const addedContact = createAction('contacts/add');
-const deleteContactItem = createAction('contacts/delete');
-
-const contactsActions = {
-  getContacts,
-  addedContact,
-  deleteContactItem,
-};
-
-export default contactsActions;
+export default getContacts;

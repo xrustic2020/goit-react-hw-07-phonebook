@@ -1,3 +1,6 @@
+// import axios from 'axios';
+// axios.defaults.baseURL = 'http://localhost:4444';
+
 const defaultContacts = [
   { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
   { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
@@ -6,6 +9,9 @@ const defaultContacts = [
 ];
 
 let items = [];
+
+// const contactsInDB = axios.get('/contacts');
+// console.log(contactsInDB);
 const contactsInLocalstorage = localStorage.getItem('contacts');
 
 if (contactsInLocalstorage) {
