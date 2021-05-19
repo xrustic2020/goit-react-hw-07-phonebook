@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import IconButton from '@material-ui/core/IconButton';
 import RotateLeftOutlinedIcon from '@material-ui/icons/RotateLeftOutlined';
 
-import filterAction from 'redux/filter/filter-actions';
+import filterAction from 'redux/contacts/contacts-actions';
 import s from './Filter.module.css';
 
 const Filter = ({ filter, setFilter, onReset }) => {

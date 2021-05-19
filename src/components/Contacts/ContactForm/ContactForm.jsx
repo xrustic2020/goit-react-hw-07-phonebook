@@ -8,8 +8,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import AddOutlinedIcon from '@material-ui/icons/AddOutlined';
 import Button from '@material-ui/core/Button';
 
-import itemsAction from 'redux/items/items-actions';
-import filterAction from 'redux/filter/filter-actions';
+import operations from 'redux/contacts/contacts-operations';
+import actions from 'redux/contacts/contacts-actions';
 import store from 'redux/store';
 
 import s from './ContactForm.module.css';
@@ -93,9 +93,8 @@ ContactForm.propTypes = {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onAddedContact: newContact =>
-      dispatch(itemsAction.addedContact(newContact)),
-    setFilter: value => dispatch(filterAction.setFilter(value)),
+    onAddedContact: newContact => dispatch(operations.addedContact(newContact)),
+    setFilter: value => dispatch(actions.setFilter(value)),
   };
 };
 

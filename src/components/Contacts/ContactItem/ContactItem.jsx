@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 
-import itemsAction from 'redux/items/items-actions';
+import operations from 'redux/contacts/contacts-operations';
 import s from './ContactItem.module.css';
 
 const ContactItem = ({ contact, onDeleteContact }) => {
@@ -40,8 +40,7 @@ ContactItem.propTypes = {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onDeleteContact: contact =>
-      dispatch(itemsAction.deleteContactItem(contact)),
+    onDeleteContact: contact => dispatch(operations.deleteContact(contact)),
   };
 };
 

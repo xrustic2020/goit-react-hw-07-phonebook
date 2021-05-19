@@ -7,20 +7,18 @@ import Filter from 'components/Filter';
 import ContactList from 'components/Contacts/ContactList';
 import Container from 'components/Container';
 import Section from 'components/Section';
+import Loader from 'components/Loader';
 
-import actions from './redux/items/items-actions';
+import operations from './redux/contacts/contacts-operations';
 
-const App = ({ contacts, getContacts }) => {
+const App = ({ loading, getContacts }) => {
   useEffect(() => {
     getContacts();
   }, []); // eslint-disable-line
 
-  useEffect(() => {
-    localStorage.setItem('contacts', JSON.stringify(contacts));
-  }, [contacts]);
-
   return (
     <Container>
+      {loading && <Loader />}
       <Section title="Phonebook">
         <ContactForm />
       </Section>
@@ -37,11 +35,11 @@ const App = ({ contacts, getContacts }) => {
 };
 
 const mapStateToProps = state => ({
-  contacts: state.contacts.items,
+  loading: state.contacts.loading,
 });
 
 const mapDispatchToProps = dispatch => {
-  return { getContacts: () => dispatch(actions.getContacts()) };
+  return { getContacts: () => dispatch(operations.getContacts()) };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
