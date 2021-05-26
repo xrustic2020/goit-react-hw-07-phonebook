@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { toast } from 'react-toastify';
 import actions from './contacts-actions';
 
 const {
@@ -20,7 +21,6 @@ const getContacts = () => dispatch => {
   axios
     .get('/contacts')
     .then(({ data }) => {
-      console.log('get:', data);
       dispatch(getSuccess(data));
     })
     .catch(error => dispatch(getError(error)));
@@ -31,19 +31,21 @@ const addedContact = contact => dispatch => {
   axios
     .post('/contacts', contact)
     .then(({ data }) => {
-      console.log('post:', data);
       dispatch(addedSuccess(data));
+      toast.success(
+        `Contact "${data.name}" with number "${data.number}" has been successfully created`,
+      );
     })
     .catch(error => dispatch(addedError(error)));
 };
 
-const deleteContact = id => dispatch => {
+const deleteContact = ({ id, name }) => dispatch => {
   dispatch(deleteRequest());
   axios
     .delete(`/contacts/${id}`)
     .then(() => {
-      console.log('delete');
       dispatch(deleteSuccess(id));
+      toast.success(`Contact "${name}" successfully deleted`);
     })
     .catch(error => dispatch(deleteError(error)));
 };

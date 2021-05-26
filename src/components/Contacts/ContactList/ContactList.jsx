@@ -4,14 +4,12 @@ import PropTypes from 'prop-types';
 import ContactItem from 'components/Contacts/ContactItem';
 import s from './ContactList.module.css';
 
-const ContactList = ({ contacts, filter }) => {
-  const filteredContacts = contacts.filter(el =>
-    el.name.toLowerCase().includes(filter.toLowerCase()),
-  );
+import { filteredContacts } from 'redux/contacts';
 
+const ContactList = ({ contacts }) => {
   return (
     <ul className={s.container}>
-      {filteredContacts.map(el => (
+      {contacts.map(el => (
         <ContactItem contact={el} key={el.id} />
       ))}
     </ul>
@@ -20,12 +18,10 @@ const ContactList = ({ contacts, filter }) => {
 
 ContactList.propTypes = {
   contacts: PropTypes.array.isRequired,
-  filter: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = state => ({
-  contacts: state.contacts.items,
-  filter: state.contacts.filter,
+  contacts: filteredContacts(state),
 });
 
 export default connect(mapStateToProps)(ContactList);

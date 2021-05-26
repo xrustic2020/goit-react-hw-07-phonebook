@@ -1,15 +1,13 @@
 import { useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { v4 as uuid } from 'uuid';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import AddOutlinedIcon from '@material-ui/icons/AddOutlined';
 import Button from '@material-ui/core/Button';
 
-import operations from 'redux/contacts/contacts-operations';
-import actions from 'redux/contacts/contacts-actions';
+import { operations, actions } from 'redux/contacts';
 import store from 'redux/store';
 
 import s from './ContactForm.module.css';
@@ -21,7 +19,6 @@ const ContactForm = ({ onAddedContact, setFilter }) => {
   const handleSubmit = evt => {
     evt.preventDefault();
     const newContact = {
-      id: uuid().slice(30),
       name,
       number,
     };
@@ -42,9 +39,6 @@ const ContactForm = ({ onAddedContact, setFilter }) => {
       return;
     }
 
-    toast.success(
-      `Contact "${name}" with number "${number}" has been successfully created`,
-    );
     onAddedContact(newContact);
   };
 

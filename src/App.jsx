@@ -9,7 +9,7 @@ import Container from 'components/Container';
 import Section from 'components/Section';
 import Loader from 'components/Loader';
 
-import operations from './redux/contacts/contacts-operations';
+import { operations, isloading } from 'redux/contacts';
 
 const App = ({ loading, getContacts }) => {
   useEffect(() => {
@@ -35,7 +35,7 @@ const App = ({ loading, getContacts }) => {
 };
 
 const mapStateToProps = state => ({
-  loading: state.contacts.loading,
+  loading: isloading(state),
 });
 
 const mapDispatchToProps = dispatch => {

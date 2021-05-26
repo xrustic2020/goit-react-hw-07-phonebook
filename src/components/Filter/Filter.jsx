@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import IconButton from '@material-ui/core/IconButton';
 import RotateLeftOutlinedIcon from '@material-ui/icons/RotateLeftOutlined';
 
-import filterAction from 'redux/contacts/contacts-actions';
+import { actions, filterValue } from 'redux/contacts';
 import s from './Filter.module.css';
 
 const Filter = ({ filter, setFilter, onReset }) => {
@@ -25,8 +25,8 @@ const Filter = ({ filter, setFilter, onReset }) => {
       <IconButton
         aria-label="delete"
         onClick={() => {
-          toast.success('Filter cleaned successfully');
           onReset();
+          toast.success('Filter cleaned successfully');
         }}
       >
         {filter && <RotateLeftOutlinedIcon />}
@@ -42,13 +42,13 @@ Filter.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  filter: state.contacts.filter,
+  filter: filterValue(state),
 });
 
 const mapDispatchToProps = dispatch => {
   return {
-    setFilter: value => dispatch(filterAction.setFilter(value)),
-    onReset: () => dispatch(filterAction.resetFilter('')),
+    setFilter: value => dispatch(actions.setFilter(value)),
+    onReset: () => dispatch(actions.resetFilter('')),
   };
 };
 

@@ -1,28 +1,21 @@
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { toast } from 'react-toastify';
 
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 
-import operations from 'redux/contacts/contacts-operations';
+import { operations } from 'redux/contacts';
 import s from './ContactItem.module.css';
 
 const ContactItem = ({ contact, onDeleteContact }) => {
-  const { id, name, number } = contact;
+  const { name, number } = contact;
   return (
     <li className={s.listItem}>
       <div className={s.fullName}>
         <span>{name}: </span>
         <span>{number}</span>
       </div>
-      <IconButton
-        aria-label="Delete"
-        onClick={() => {
-          toast.success(`Contact "${name}" successfully deleted`);
-          onDeleteContact(id);
-        }}
-      >
+      <IconButton aria-label="Delete" onClick={() => onDeleteContact(contact)}>
         <DeleteIcon />
       </IconButton>
     </li>
