@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { actions, filterValue } from 'redux/contacts';
 
 import Filter from './Filter';
-//
+
 const mapStateToProps = state => ({
   filter: filterValue(state),
 });
