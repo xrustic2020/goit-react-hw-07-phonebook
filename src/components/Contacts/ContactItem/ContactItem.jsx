@@ -1,10 +1,8 @@
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 
-import { operations } from 'redux/contacts';
 import s from './ContactItem.module.css';
 
 const ContactItem = ({ contact, onDeleteContact }) => {
@@ -31,10 +29,4 @@ ContactItem.propTypes = {
   onDeleteContact: PropTypes.func.isRequired,
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    onDeleteContact: contact => dispatch(operations.deleteContact(contact)),
-  };
-};
-
-export default connect(null, mapDispatchToProps)(ContactItem);
+export default ContactItem;

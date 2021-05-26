@@ -1,11 +1,9 @@
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
 
 import IconButton from '@material-ui/core/IconButton';
 import RotateLeftOutlinedIcon from '@material-ui/icons/RotateLeftOutlined';
 
-import { actions, filterValue } from 'redux/contacts';
 import s from './Filter.module.css';
 
 const Filter = ({ filter, setFilter, onReset }) => {
@@ -41,15 +39,4 @@ Filter.propTypes = {
   onReset: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state => ({
-  filter: filterValue(state),
-});
-
-const mapDispatchToProps = dispatch => {
-  return {
-    setFilter: value => dispatch(actions.setFilter(value)),
-    onReset: () => dispatch(actions.resetFilter('')),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Filter);
+export default Filter;

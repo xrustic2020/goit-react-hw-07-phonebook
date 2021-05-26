@@ -1,16 +1,11 @@
 import { useState } from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 import AddOutlinedIcon from '@material-ui/icons/AddOutlined';
 import Button from '@material-ui/core/Button';
 
-import { operations, actions } from 'redux/contacts';
-import store from 'redux/store';
-
 import s from './ContactForm.module.css';
+import checkingContact from './checkingContact';
 
 const ContactForm = ({ onAddedContact, setFilter }) => {
   const [name, setName] = useState('');
@@ -18,28 +13,11 @@ const ContactForm = ({ onAddedContact, setFilter }) => {
 
   const handleSubmit = evt => {
     evt.preventDefault();
-    const newContact = {
-      name,
-      number,
-    };
+    const isCheckedContact = checkingContact(name, number, setFilter);
     setName('');
     setNumber('');
 
-    const prevState = store.getState().contacts.items;
-    const contactFound = prevState.find(el => el.name === name);
-    if (contactFound) {
-      toast.warn(`"${name}" is already in contacts`);
-      setFilter(name);
-      return;
-    } else if (!name) {
-      toast.error('the "Name" field must contain the name of the contact');
-      return;
-    } else if (!number) {
-      toast.error('the "Number" field must contain the contact number');
-      return;
-    }
-
-    onAddedContact(newContact);
+    if (isCheckedContact) onAddedContact(isCheckedContact);
   };
 
   return (
@@ -85,11 +63,4 @@ ContactForm.propTypes = {
   setFilter: PropTypes.func.isRequired,
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    onAddedContact: newContact => dispatch(operations.addedContact(newContact)),
-    setFilter: value => dispatch(actions.setFilter(value)),
-  };
-};
-
-export default connect(null, mapDispatchToProps)(ContactForm);
+export default ContactForm;
